@@ -1,0 +1,43 @@
+name: Trigger auto deployment for appgit
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/appgit-AutoDeployTrigger-26d412b9-e4e8-43d9-be2c-f88d3407579a.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.APPGIT_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: ca102b11fbadacr.azurecr.io
+          registryUsername: ${{ secrets.APPGIT_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.APPGIT_REGISTRY_PASSWORD }}
+          containerAppName: appgit
+          resourceGroup: rg-multics
+          imageToBuild: ca102b11fbadacr.azurecr.io/appgit:${{ github.sha }}
+          
+            
+
+     
+
