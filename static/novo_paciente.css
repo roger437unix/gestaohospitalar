@@ -1,0 +1,35 @@
+.container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 30%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container input[type=text], input[type=number], input[type=tel] {
+    width: 300px;
+    height: 30px;
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+    color: #011509;
+}
+
+.submit-btn {
+    /* box-sizing: border-box; */
+    width: 250px;
+    height: 40px;
+    margin-top: 20px;    
+    background-color: #288e2d;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
